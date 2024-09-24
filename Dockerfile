@@ -1,4 +1,4 @@
-FROM openjdk:18-jdk-alpine
+FROM openjdk:17-jdk-alpine
 EXPOSE 8080
 COPY src/main/resources/application.properties /application.properties
 ADD target/b2b-connect.jar b2b-connect.jar
