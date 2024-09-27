@@ -39,7 +39,6 @@ public class B2BConnectApplication implements CommandLineRunner {
 			role.setDescription("Admin");
 			roleRepository.save(role);
 			
-			
 			UserAccount user = new UserAccount();
 			user.setCreatedDate(LocalDate.now());
 			user.setUsername("admin");
