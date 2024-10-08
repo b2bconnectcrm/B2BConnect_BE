@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Employee implements Serializable {
@@ -53,7 +54,8 @@ public class Employee implements Serializable {
 	private List<Deals> deals;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq_id")
+	@SequenceGenerator(name = "employee_seq_id", sequenceName = "employee_seq_id", allocationSize = 1)
 	public Long getId() {
 		return id;
 	}

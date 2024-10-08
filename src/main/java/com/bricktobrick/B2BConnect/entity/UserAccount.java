@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class UserAccount {
@@ -31,7 +32,8 @@ public class UserAccount {
 	private LoginType loginType;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "useraccount_seq_id")
+	@SequenceGenerator(name = "useraccount_seq_id", sequenceName = "useraccount_seq_id", allocationSize = 1)
 	public Long getId() {
 		return id;
 	}

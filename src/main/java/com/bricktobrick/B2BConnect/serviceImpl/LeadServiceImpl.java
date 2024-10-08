@@ -1,7 +1,9 @@
 package com.bricktobrick.B2BConnect.serviceImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.bricktobrick.B2BConnect.builders.LeadBuilder;
 import com.bricktobrick.B2BConnect.dtos.LeadDto;
 import com.bricktobrick.B2BConnect.entity.Lead;
+import com.bricktobrick.B2BConnect.entity.Property;
 import com.bricktobrick.B2BConnect.repository.LeadRepository;
+import com.bricktobrick.B2BConnect.repository.PropertyRepository;
 import com.bricktobrick.B2BConnect.services.LeadService;
 
 @Service
@@ -21,10 +25,24 @@ public class LeadServiceImpl implements LeadService {
 	@Autowired
 	private LeadBuilder leadBuilder;
 
+	@Autowired
+	private PropertyRepository propertyRepository;
+
 	@Override
 	public void addLead(LeadDto leadDto) {
 		// TODO Auto-generated method stub
 		Lead lead = leadBuilder.convertToLeadModel(leadDto);
+		List<Property> properties = new ArrayList<Property>();
+		if(leadDto.getProperties() != null && leadDto.getProperties().size() > 0) {
+			leadDto.getProperties().forEach( property ->{
+			Optional<Property> optional=	propertyRepository.findById(property.getId());
+			if(optional.isPresent()) {
+				properties.add(optional.get());
+			}
+			});
+			lead.setProperties(properties);
+		}
+		
 		lead.setCreatedDate(LocalDate.now());
 		if (lead != null) {
 			leadRepository.save(lead);

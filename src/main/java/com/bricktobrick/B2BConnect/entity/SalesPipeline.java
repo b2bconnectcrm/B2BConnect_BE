@@ -1,13 +1,13 @@
 package com.bricktobrick.B2BConnect.entity;
 
 public enum SalesPipeline {
-	OPEN("Open", " Open"),
+	OPEN("OPEN", " Open"),
 	COLDCALLING("COLD_CALLING_MEETING", " Cold Calling/Meeting"),
 	PROPOSAL("PROPOSAL", " Proposal"),
 	NEGOTIATION("NEGOTIATION", " Negotiation"),
 	DEALSOFFERED("DEALS_OFFERED", " Deal Offered"),
 	CLOSURE("CLOSURE", " Closure"),
-	CONVERSION("Conversion", " Conversion");
+	CONVERSION("CONVERSION", " Conversion");
 	
 	private final String name;
 	private final String description;

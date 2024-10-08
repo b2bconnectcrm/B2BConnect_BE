@@ -9,6 +9,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Property {
@@ -45,9 +47,13 @@ public class Property {
 	
 	// uploaded image path
 	private String propertyMap;
+	
+	
+	private Lead lead;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "property_seq_id")
+	@SequenceGenerator(name = "property_seq_id", sequenceName = "property_seq_id", allocationSize = 1)
 	public Long getId() {
 		return id;
 	}
@@ -176,6 +182,15 @@ public class Property {
 
 	public void setPropertyMap(String propertyMap) {
 		this.propertyMap = propertyMap;
+	}
+
+	@ManyToOne
+	public Lead getLead() {
+		return lead;
+	}
+
+	public void setLead(Lead lead) {
+		this.lead = lead;
 	}
 	
 	

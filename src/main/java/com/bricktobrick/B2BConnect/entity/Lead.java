@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Lead implements Serializable{
@@ -53,10 +54,32 @@ public class Lead implements Serializable{
 	
 	private String owner;
 	
+	private boolean clientInterested;
+	
+	private boolean crossSegmentLeads;
+	
+	private NotInterestedStatus notINterestedStatus;
+	
+	private PropertyType propertyType;
+	
+	private SubPropetyType subPropetyType;
+	
+	private SalesPipeline salesPipeline;
+	
+	private String comments;
+	
+	private String crossSegments;
+	
+	private VisitType plantodo;
+	
+	
 	private List<Deals> deals;
 	
+	private List<Property> properties;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lead_seq_id")
+	@SequenceGenerator(name = "lead_seq_id", sequenceName = "lead_seq_id", allocationSize = 1)
 	public Long getId() {
 		return id;
 	}
@@ -182,6 +205,97 @@ public class Lead implements Serializable{
 	public void setDeals(List<Deals> deals) {
 		this.deals = deals;
 	}
+
+	public boolean isClientInterested() {
+		return clientInterested;
+	}
+
+	public void setClientInterested(boolean clientInterested) {
+		this.clientInterested = clientInterested;
+	}
+
+	public boolean isCrossSegmentLeads() {
+		return crossSegmentLeads;
+	}
+
+	public void setCrossSegmentLeads(boolean crossSegmentLeads) {
+		this.crossSegmentLeads = crossSegmentLeads;
+	}
+
+	@Enumerated(EnumType.STRING)
+	public NotInterestedStatus getNotINterestedStatus() {
+		return notINterestedStatus;
+	}
+
+	public void setNotINterestedStatus(NotInterestedStatus notINterestedStatus) {
+		this.notINterestedStatus = notINterestedStatus;
+	}
+
+
+	@Enumerated(EnumType.STRING)
+	public SalesPipeline getSalesPipeline() {
+		return salesPipeline;
+	}
+
+	public void setSalesPipeline(SalesPipeline salesPipeline) {
+		this.salesPipeline = salesPipeline;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getCrossSegments() {
+		return crossSegments;
+	}
+
+	public void setCrossSegments(String crossSegments) {
+		this.crossSegments = crossSegments;
+	}
+
+	@Enumerated(EnumType.STRING)
+	public PropertyType getPropertyType() {
+		return propertyType;
+	}
+
+	public void setPropertyType(PropertyType propertyType) {
+		this.propertyType = propertyType;
+	}
+
+	@Enumerated(EnumType.STRING)
+	public SubPropetyType getSubPropetyType() {
+		return subPropetyType;
+	}
+
+	public void setSubPropetyType(SubPropetyType subPropetyType) {
+		this.subPropetyType = subPropetyType;
+	}
+
+	@Enumerated(EnumType.STRING)
+	public VisitType getPlantodo() {
+		return plantodo;
+	}
+
+	public void setPlantodo(VisitType plantodo) {
+		this.plantodo = plantodo;
+	}
+
+	@JsonIgnore
+	@JsonProperty
+	@OneToMany(cascade = CascadeType.MERGE)
+	public List<Property> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(List<Property> properties) {
+		this.properties = properties;
+	}
+	
+	
 	
 
 

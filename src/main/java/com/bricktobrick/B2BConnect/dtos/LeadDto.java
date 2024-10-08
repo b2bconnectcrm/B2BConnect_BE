@@ -1,8 +1,8 @@
 package com.bricktobrick.B2BConnect.dtos;
 
+import java.util.List;
+
 import com.bricktobrick.B2BConnect.entity.Address;
-import com.bricktobrick.B2BConnect.entity.LeadSource;
-import com.bricktobrick.B2BConnect.entity.LeadStatus;
 
 public class LeadDto {
 
@@ -29,10 +29,30 @@ public class LeadDto {
 	private String leadSource;
 
 	private String leadStatus;
-	
+
 	private String createdDate;
-	
+
 	private String owner;
+
+	private boolean clientInterested;
+
+	private boolean crossSegmentLeads;
+
+	private String notINterestedStatus;
+	
+	private String propertyType;
+
+	private String subPropertyType;
+
+	private String salesPipeline;
+
+	private String comments;
+
+	private String crossSegments;
+	
+	private  String plantodo;
+	
+	private List<PropertyDto> properties;
 
 	public Long getId() {
 		return id;
@@ -146,8 +166,89 @@ public class LeadDto {
 		this.owner = owner;
 	}
 
-	
+	public boolean isClientInterested() {
+		return clientInterested;
+	}
+
+	public void setClientInterested(boolean clientInterested) {
+		this.clientInterested = clientInterested;
+	}
+
+	public boolean isCrossSegmentLeads() {
+		return crossSegmentLeads;
+	}
+
+	public void setCrossSegmentLeads(boolean crossSegmentLeads) {
+		this.crossSegmentLeads = crossSegmentLeads;
+	}
+
+	public String getNotINterestedStatus() {
+		return notINterestedStatus;
+	}
+
+	public void setNotINterestedStatus(String notINterestedStatus) {
+		this.notINterestedStatus = notINterestedStatus;
+	}
+
 	
 
+	public String getSalesPipeline() {
+		return salesPipeline;
+	}
 
+	public void setSalesPipeline(String salesPipeline) {
+		this.salesPipeline = salesPipeline;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getCrossSegments() {
+		return crossSegments;
+	}
+
+	public void setCrossSegments(String crossSegments) {
+		this.crossSegments = crossSegments;
+	}
+
+	public String getPropertyType() {
+		return propertyType;
+	}
+
+	public void setPropertyType(String propertyType) {
+		this.propertyType = propertyType;
+	}
+
+	public String getSubPropertyType() {
+		return subPropertyType;
+	}
+
+	public void setSubPropertyType(String subPropertyType) {
+		this.subPropertyType = subPropertyType;
+	}
+
+	public String getPlantodo() {
+		return plantodo;
+	}
+
+	public void setPlantodo(String plantodo) {
+		this.plantodo = plantodo;
+	}
+
+	public List<PropertyDto> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(List<PropertyDto> properties) {
+		this.properties = properties;
+	}
+
+	
+	
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.bricktobrick.B2BConnect.entity.Department;
 import com.bricktobrick.B2BConnect.entity.LoginType;
 import com.bricktobrick.B2BConnect.entity.Role;
 import com.bricktobrick.B2BConnect.entity.UserAccount;
@@ -34,6 +35,7 @@ public class B2BConnectApplication implements CommandLineRunner {
 		List<Role> roles = roleRepository.findAll();
 		if(roles.size() == 0) {
 			Role role = new Role();
+			role.setDepartment(Department.Finance);
 			role.setRoleDisplayName("ADMIN");
 			role.setRoleName("Admin");
 			role.setDescription("Admin");
