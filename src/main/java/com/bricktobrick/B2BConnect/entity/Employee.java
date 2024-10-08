@@ -1,6 +1,10 @@
 package com.bricktobrick.B2BConnect.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
@@ -45,6 +49,8 @@ public class Employee implements Serializable {
 	private String pancardFilePath;
 	
 	private UserAccount userAccount;
+	
+	private List<Deals> deals;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -154,6 +160,20 @@ public class Employee implements Serializable {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
+	@JsonIgnore
+	@JsonProperty
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Deals> getDeals() {
+		return deals;
+	}
+
+	public void setDeals(List<Deals> deals) {
+		this.deals = deals;
+	}
+
+	
+	
+	
 	
 	
 

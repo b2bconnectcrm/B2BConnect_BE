@@ -1,7 +1,6 @@
 package com.bricktobrick.B2BConnect.dtos;
 
 import com.bricktobrick.B2BConnect.entity.Address;
-import com.bricktobrick.B2BConnect.entity.Role;
 import com.bricktobrick.B2BConnect.entity.UserAccount;
 
 public class EmployeeDto {
@@ -31,6 +30,7 @@ public class EmployeeDto {
 	private String pancardFilePath;
 	
 	private UserAccount userAccount;
+	
 
 	public Long getId() {
 		return id;
@@ -135,10 +135,6 @@ public class EmployeeDto {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-
-	
-	
-	
 
 
 }

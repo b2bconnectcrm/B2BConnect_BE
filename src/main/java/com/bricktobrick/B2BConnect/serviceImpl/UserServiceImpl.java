@@ -3,7 +3,6 @@ package com.bricktobrick.B2BConnect.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bricktobrick.B2BConnect.builders.OTPBuilder;
 import com.bricktobrick.B2BConnect.builders.UserBuilder;
 import com.bricktobrick.B2BConnect.common.CommonException;
 import com.bricktobrick.B2BConnect.common.CommonExceptionMessage;
@@ -21,8 +20,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserBuilder userBuilder;
 
-	@Autowired
-	private OTPBuilder otpBuilder;
+//	@Autowired
+//	private OTPBuilder otpBuilder;
 
 	@Override
 	public void createUser(UserDto userDto) {
@@ -33,10 +32,16 @@ public class UserServiceImpl implements UserService {
 			throw CommonException.createException(CommonExceptionMessage.ALREADY_EXISTS, dbUserAccount.getUsername()+ " Username ");
 		}
 
-		UserAccount dbUserAccount1 = userRepository.findByUsernameAndMobile(userDto.getUsername(), userDto.getMobile());
+//		UserAccount dbUserAccount1 = userRepository.findByUsernameAndMobile(userDto.getUsername(), userDto.getMobile());
+//		if(dbUserAccount1 != null) {
+//			throw CommonException.createException(CommonExceptionMessage.ALREADY_EXISTS, " Username and Mobile ");
+//		}
+		
+		UserAccount dbUserAccount1 = userRepository.findByUsernameAndPassword(userDto.getUsername(),userDto.getPassword());
 		if(dbUserAccount1 != null) {
-			throw CommonException.createException(CommonExceptionMessage.ALREADY_EXISTS, " Username and Mobile ");
+			throw CommonException.createException(CommonExceptionMessage.ALREADY_EXISTS, " Username and Password ");
 		}
+		
 		UserAccount user = userBuilder.convertToModel(userDto);
 		if (user != null) {
 			userRepository.save(user);
@@ -49,12 +54,12 @@ public class UserServiceImpl implements UserService {
 		UserDto userDto2 = new UserDto();
 
 		// TODO Auto-generated method stub
-		UserAccount dbUser = userRepository.findByUsernameAndMobile(userDto.getUsername(), userDto.getMobile());
+		UserAccount dbUser = userRepository.findByUsernameAndPassword(userDto.getUsername(), userDto.getPassword());
 
 		if (dbUser != null) {
-			String otp = otpBuilder.generateOtp(4);
-			dbUser.setOtp(otp);
-			userRepository.save(dbUser);
+//			String otp = otpBuilder.generateOtp(4);
+//			dbUser.setOtp(otp);
+//			userRepository.save(dbUser);
 
 			userDto2.setMobile(dbUser.getMobile());
 			userDto2.setUsername(dbUser.getUsername());

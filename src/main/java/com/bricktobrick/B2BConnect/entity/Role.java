@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Role implements Serializable {
@@ -43,8 +44,10 @@ public class Role implements Serializable {
 	public Role() {
 	}
 
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_seq_id")
+	@SequenceGenerator(name = "role_seq_id", sequenceName = "role_seq_id", allocationSize = 1)
 	public Long getId() {
 		return id;
 	}

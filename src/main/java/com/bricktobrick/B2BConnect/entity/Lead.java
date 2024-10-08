@@ -2,7 +2,12 @@ package com.bricktobrick.B2BConnect.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,6 +15,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Lead implements Serializable{
@@ -46,6 +52,8 @@ public class Lead implements Serializable{
 	private LocalDate createdDate;
 	
 	private String owner;
+	
+	private List<Deals> deals;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -163,8 +171,17 @@ public class Lead implements Serializable{
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	
-	
+
+	@JsonIgnore
+	@JsonProperty
+	@OneToMany(cascade = CascadeType.ALL)
+	public List<Deals> getDeals() {
+		return deals;
+	}
+
+	public void setDeals(List<Deals> deals) {
+		this.deals = deals;
+	}
 	
 
 

@@ -24,21 +24,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.azure.storage.blob.BlobClient;
+import com.azure.storage.blob.BlobServiceClient;
+import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.bricktobrick.B2BConnect.dtos.ImageDto;
+
+import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping(value = "/file")
 @CrossOrigin
 public class UploadController {
-	
+
 	@Value("${fileUploadPath}")
 	private String fileUploadPath;
-	
+
+	@Value("${spring.cloud.azure.storage.blob.container-name}")
+	private String containerName;
+
+	@Value("${azure.blob-storage.connection-string}")
+	private String connectionString;
+
+	private BlobServiceClient blobServiceClient;
+
+//	@PostConstruct
+//	public void init() {
+//		blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
+//	}
+
 	@PostMapping(value = "/upload")
 	public ImageDto uploadPropertyMap(@RequestBody MultipartFile file) throws IOException {
 		String extension = getFileExtension(file.getOriginalFilename());
 		Path rootLocation = Paths.get(fileUploadPath);
-		if (!(extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("jpeg") || extension.equalsIgnoreCase("jpg"))) {
+		if (!(extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("jpeg")
+				|| extension.equalsIgnoreCase("jpg"))) {
 			throw new RuntimeException("Please select file with .png or .jpeg or .jpg");
 		}
 		String random = UUID.randomUUID().toString() + "." + extension;
@@ -53,7 +72,6 @@ public class UploadController {
 			return "";
 	}
 
-	
 	@GetMapping("/image/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> getFile(@PathVariable String filename)
@@ -62,7 +80,7 @@ public class UploadController {
 		try {
 			Path path = load(filename);
 			Resource file = new UrlResource(path.toUri());
-			if ( file.exists() ||  file.isReadable()) {
+			if (file.exists() || file.isReadable()) {
 				return ResponseEntity.ok()
 						.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 						.body(file);
@@ -76,10 +94,25 @@ public class UploadController {
 
 	}
 
-	
 	public Path load(String filename) {
 		Path rootLocation = Paths.get(fileUploadPath);
 		return rootLocation.resolve(filename);
+	}
+
+	@PostMapping(value = "/upload1")
+	public ImageDto uploadFile(@RequestBody MultipartFile file) throws IOException {
+		String extension = getFileExtension(file.getOriginalFilename());
+		if (!(extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("jpeg")
+				|| extension.equalsIgnoreCase("jpg"))) {
+			throw new RuntimeException("Please select file with .png or .jpeg or .jpg");
+		}
+		String blobFilename =file.getOriginalFilename();
+		BlobClient blobClient = blobServiceClient.getBlobContainerClient(containerName).getBlobClient(blobFilename);
+		
+		blobClient.upload(file.getInputStream(), file.getSize(), true);
+		
+		String imageUrl =  blobClient.getBlobUrl();
+		return new ImageDto(file.getOriginalFilename(), imageUrl);
 	}
 
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.bricktobrick.B2BConnect.dtos.EmployeeDto;
-import com.bricktobrick.B2BConnect.dtos.UserDto;
 import com.bricktobrick.B2BConnect.entity.Employee;
 import com.bricktobrick.B2BConnect.entity.LoginType;
 import com.bricktobrick.B2BConnect.entity.UserAccount;
@@ -29,7 +28,6 @@ public class EmployeeBuilder {
 		employee.setId(employeeDto.getId());
 		employee.setEmail(employeeDto.getEmail());
 		employee.setMobile(employeeDto.getMobile());
-
 	
 		employee.setName(employeeDto.getName());
 		employee.setPancardFilePath(employeeDto.getPancardFilePath());
@@ -54,7 +52,6 @@ public class EmployeeBuilder {
 		employeeDto.setId(employee.getId());
 		employeeDto.setEmail(employee.getEmail());
 		employeeDto.setMobile(employee.getMobile());
-
 	
 		employeeDto.setName(employee.getName());
 		employeeDto.setPancardFilePath(employee.getPancardFilePath());
@@ -89,7 +86,6 @@ public class EmployeeBuilder {
 		employeeDto.setId(employee.getId());
 		employeeDto.setEmail(employee.getEmail());
 		employeeDto.setMobile(employee.getMobile());
-
 	
 		employeeDto.setName(employee.getName());
 		employeeDto.setPancardFilePath(employee.getPancardFilePath());
@@ -111,7 +107,7 @@ public class EmployeeBuilder {
 		employee.setId(employeeDto.getId());
 		employee.setEmail(employeeDto.getEmail());
 		employee.setMobile(employeeDto.getMobile());
-
+		
 	
 		employee.setName(employeeDto.getName());
 		employee.setPancardFilePath(employeeDto.getPancardFilePath());
@@ -132,6 +128,7 @@ public class EmployeeBuilder {
 		userAccount.setLoginType(LoginType.WEB);
 		userAccount.setMobile(employeeDto.getMobile());
 		userAccount.setUsername(employeeDto.getUsername());
+		userAccount.setPassword("b2b@2024");
 		userAccount.setRole(roleBuilder.convertToModel(employeeDto.getRole()));
 		return userAccount;
 
