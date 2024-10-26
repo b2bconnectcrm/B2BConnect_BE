@@ -9,14 +9,16 @@ public class DealsDto {
 	private Long id;
 
 	private String dealName;
+	
+	private String dealOwner;
 
 	private String clientName;
 
 	private String accountName;
 
-	private String SalesPipeline;
+	private String salesPipeline;
 
-	private Stage stage;
+	private String stage;
 
 	private String unitStatus;
 
@@ -81,18 +83,19 @@ public class DealsDto {
 	}
 
 	public String getSalesPipeline() {
-		return SalesPipeline;
+		return salesPipeline;
 	}
 
 	public void setSalesPipeline(String salesPipeline) {
-		SalesPipeline = salesPipeline;
+		this.salesPipeline = salesPipeline;
 	}
 
-	public Stage getStage() {
+
+	public String getStage() {
 		return stage;
 	}
 
-	public void setStage(Stage stage) {
+	public void setStage(String stage) {
 		this.stage = stage;
 	}
 
@@ -214,6 +217,14 @@ public class DealsDto {
 
 	public void setLeadDto(LeadDto leadDto) {
 		this.leadDto = leadDto;
+	}
+
+	public String getDealOwner() {
+		return dealOwner;
+	}
+
+	public void setDealOwner(String dealOwner) {
+		this.dealOwner = dealOwner;
 	}
 	
 	

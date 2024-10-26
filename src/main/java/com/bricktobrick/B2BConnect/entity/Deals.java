@@ -28,7 +28,7 @@ public class Deals implements Serializable {
 
 	private String accountName;
 
-	private SalesPipeline SalesPipeline;
+	private SalesPipeline salesPipeline;
 
 	private Stage stage;
 
@@ -49,8 +49,6 @@ public class Deals implements Serializable {
 	private String phone;
 
 	private ProjectType projectType;
-
-	private String subProjectType;
 
 	private String referredBy;
 
@@ -95,13 +93,14 @@ public class Deals implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	public SalesPipeline getSalesPipeline() {
-		return SalesPipeline;
+		return salesPipeline;
 	}
 
 	public void setSalesPipeline(SalesPipeline salesPipeline) {
-		SalesPipeline = salesPipeline;
+		this.salesPipeline = salesPipeline;
 	}
-
+	
+	
 	@Enumerated(EnumType.STRING)
 	public Stage getStage() {
 		return stage;
@@ -185,13 +184,6 @@ public class Deals implements Serializable {
 		this.projectType = projectType;
 	}
 
-	public String getSubProjectType() {
-		return subProjectType;
-	}
-
-	public void setSubProjectType(String subProjectType) {
-		this.subProjectType = subProjectType;
-	}
 
 	public String getReferredBy() {
 		return referredBy;
